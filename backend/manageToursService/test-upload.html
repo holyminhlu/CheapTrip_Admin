@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Tour Image Upload - Google Drive</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            white-space: pre-wrap;
+        }
+        .success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        .image-preview {
+            max-width: 300px;
+            max-height: 200px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Tour Image Upload - Google Drive</h1>
+
+    <!-- Upload Single Image -->
+    <div class="container">
+        <h2>1. Upload Tour Image</h2>
+        <form id="uploadForm">
+            <div class="form-group">
+                <label for="tourId">Tour ID:</label>
+                <input type="text" id="tourId" name="tourId" placeholder="Enter tour ID" required>
+            </div>
+            <div class="form-group">
+                <label for="imageFile">Select Image:</label>
+                <input type="file" id="imageFile" name="image" accept="image/*" required>
+            </div>
+            <button type="submit">Upload Image</button>
+        </form>
+        <div id="uploadResult"></div>
+        <img id="uploadedImage" class="image-preview" style="display: none;">
+    </div>
+
+    <!-- Create Tour with Image -->
+    <div class="container">
+        <h2>2. Create Tour with Image</h2>
+        <form id="createTourForm">
+            <div class="form-group">
+                <label for="tour_id">Tour ID:</label>
+                <input type="text" id="tour_id" name="tour_id" placeholder="TOUR001" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Tour Name:</label>
+                <input type="text" id="name" name="name" placeholder="Tour Name" required>
+            </div>
+            <div class="form-group">
+                <label for="type">Tour Type:</label>
+                <select id="type" name="type" required>
+                    <option value="tour_thuong">Tour Thường</option>
+                    <option value="tour_doan">Tour Đoàn</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="price_per_adult">Price per Adult:</label>
+                <input type="number" id="price_per_adult" name="price_per_adult" placeholder="1000000">
+            </div>
+            <div class="form-group">
+                <label for="destination">Destination:</label>
+                <input type="text" id="destination" name="destination" placeholder="Destination">
+            </div>
+            <div class="form-group">
+                <label for="tourImage">Tour Image:</label>
+                <input type="file" id="tourImage" name="image" accept="image/*">
+            </div>
+            <button type="submit">Create Tour with Image</button>
+        </form>
+        <div id="createResult"></div>
+    </div>
+
+    <!-- Update Tour with Image -->
+    <div class="container">
+        <h2>3. Update Tour with Image</h2>
+        <form id="updateTourForm">
+            <div class="form-group">
+                <label for="updateTourId">Tour ID to Update:</label>
+                <input type="text" id="updateTourId" name="id" placeholder="Enter tour ID" required>
+            </div>
+            <div class="form-group">
+                <label for="updateName">New Name:</label>
+                <input type="text" id="updateName" name="name" placeholder="New Tour Name">
+            </div>
+            <div class="form-group">
+                <label for="updatePrice">New Price:</label>
+                <input type="number" id="updatePrice" name="price_per_adult" placeholder="New Price">
+            </div>
+            <div class="form-group">
+                <label for="updateImage">New Image:</label>
+                <input type="file" id="updateImage" name="image" accept="image/*">
+            </div>
+            <button type="submit">Update Tour</button>
+        </form>
+        <div id="updateResult"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
+
+        // Upload Single Image
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData();
+            formData.append('tourId', document.getElementById('tourId').value);
+            formData.append('image', document.getElementById('imageFile').files[0]);
+
+            try {
+                const response = await fetch(`${API_BASE}/tours/upload-image`, {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                
+                const resultDiv = document.getElementById('uploadResult');
+                resultDiv.className = result.success ? 'result success' : 'result error';
+                resultDiv.textContent = JSON.stringify(result, null, 2);
+
+                if (result.success && result.data.imageInfo.imageUrl) {
+                    const img = document.getElementById('uploadedImage');
+                    img.src = result.data.imageInfo.imageUrl;
+                    img.style.display = 'block';
+                }
+            } catch (error) {
+                document.getElementById('uploadResult').className = 'result error';
+                document.getElementById('uploadResult').textContent = 'Error: ' + error.message;
+            }
+        });
+
+        // Create Tour with Image
+        document.getElementById('createTourForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData();
+            
+            // Add form fields
+            formData.append('tour_id', document.getElementById('tour_id').value);
+            formData.append('name', document.getElementById('name').value);
+            formData.append('type', document.getElementById('type').value);
+            formData.append('price_per_adult', document.getElementById('price_per_adult').value);
+            formData.append('destination', document.getElementById('destination').value);
+            
+            // Add image if selected
+            const imageFile = document.getElementById('tourImage').files[0];
+            if (imageFile) {
+                formData.append('image', imageFile);
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/tours/with-image`, {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                
+                const resultDiv = document.getElementById('createResult');
+                resultDiv.className = result.success ? 'result success' : 'result error';
+                resultDiv.textContent = JSON.stringify(result, null, 2);
+            } catch (error) {
+                document.getElementById('createResult').className = 'result error';
+                document.getElementById('createResult').textContent = 'Error: ' + error.message;
+            }
+        });
+
+        // Update Tour with Image
+        document.getElementById('updateTourForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const tourId = document.getElementById('updateTourId').value;
+            const formData = new FormData();
+            
+            // Add form fields
+            formData.append('name', document.getElementById('updateName').value);
+            formData.append('price_per_adult', document.getElementById('updatePrice').value);
+            
+            // Add image if selected
+            const imageFile = document.getElementById('updateImage').files[0];
+            if (imageFile) {
+                formData.append('image', imageFile);
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/tours/${tourId}/with-image`, {
+                    method: 'PUT',
+                    body: formData
+                });
+                const result = await response.json();
+                
+                const resultDiv = document.getElementById('updateResult');
+                resultDiv.className = result.success ? 'result success' : 'result error';
+                resultDiv.textContent = JSON.stringify(result, null, 2);
+            } catch (error) {
+                document.getElementById('updateResult').className = 'result error';
+                document.getElementById('updateResult').textContent = 'Error: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html> 
