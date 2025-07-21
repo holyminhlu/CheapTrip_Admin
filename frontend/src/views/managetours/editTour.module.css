@@ -1,0 +1,150 @@
+.editContainer {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  min-width: 0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  padding: 32px 32px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  flex: 1;
+  overflow: auto;
+}
+.editHeader {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 24px;
+}
+.editHeader h2 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #1bc6e8;
+  margin: 0;
+  letter-spacing: 1px;
+}
+.editForm {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.formCol {
+  flex: 1 1 0;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.formRow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.formRow label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 2px;
+  text-align: left;
+}
+.formRow input {
+  border: 1.5px solid #b2e6f7;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 1rem;
+  background: #f8fcff;
+  transition: border 0.2s;
+}
+.formRow input:focus {
+  border: 1.5px solid #1bc6e8;
+  outline: none;
+}
+.formRow select {
+  border: 1.5px solid #b2e6f7;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 1rem;
+  background: #f8fcff;
+  transition: border 0.2s;
+}
+.formRow select:focus {
+  border: 1.5px solid #1bc6e8;
+  outline: none;
+}
+.formActions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: auto;
+  padding-bottom: 8px;
+  box-sizing: border-box;
+}
+.saveBtn {
+  background: linear-gradient(90deg, #1bc6e8 60%, #0e9ec7 100%);
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 9px 28px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(27,198,232,0.08);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.saveBtn:hover {
+  background: linear-gradient(90deg, #0e9ec7 60%, #1bc6e8 100%);
+  box-shadow: 0 4px 16px rgba(27,198,232,0.15);
+}
+.cancelBtn {
+  background: #f3f3f3;
+  color: #222;
+  border: 1.5px solid #ddd;
+  border-radius: 24px;
+  padding: 9px 28px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.cancelBtn:hover {
+  background: #e0e0e0;
+}
+
+@media (max-width: 900px) {
+  .editForm {
+    flex-direction: column;
+    gap: 0;
+  }
+  .formCol {
+    min-width: 0;
+    width: 100%;
+    gap: 12px;
+  }
+  .formActions {
+    margin-top: 16px;
+  }
+  .editContainer {
+    padding: 10px 2vw 16px 2vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .editContainer {
+    max-width: 98vw;
+    padding: 12px 2vw 18px 2vw;
+  }
+  .editHeader h2 {
+    font-size: 1.1rem;
+  }
+  .saveBtn, .cancelBtn {
+    font-size: 0.95rem;
+    padding: 7px 12px;
+  }
+} 
