@@ -5,8 +5,11 @@ on:
     branches: [main]
     paths:
       - 'backend/**'
-      - 'frontend/**'
-      - '.github/workflows/**'  # cho phép sửa workflow cũng trigger
+      - 'src/**'
+      - 'public/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/**'
 
 jobs:
   build-and-push:
@@ -25,24 +28,22 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # Optional: Install Node for test steps
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      # Run frontend tests
+      # ✅ CHẠY TEST FRONTEND (ở thư mục gốc)
       - name: Run Frontend Tests
-        working-directory: ./frontend
         run: |
-          npm install
+          npm ci
           npm run test || echo "No tests defined"
 
-      # Run backend tests (tùy thuộc vào backend dùng gì)
+      # (Optional) Backend test
       - name: Run Backend Tests
         working-directory: ./backend
         run: |
-          echo "No backend test script defined"  # sửa nếu có test thực tế
+          echo "No backend test script defined"
 
       # Build & push Manage Booking Service
       - name: Build and push manage-booking-service
@@ -92,11 +93,11 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      # Build & push Frontend
+      # ✅ Build & push frontend (ở root)
       - name: Build and push frontend
         uses: docker/build-push-action@v5
         with:
-          context: ./frontend
+          context: .
           push: true
           tags: |
             huuluan2004/cheaptrip-frontend:latest
