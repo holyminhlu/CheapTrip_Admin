@@ -1,0 +1,150 @@
+.discount-bg {
+  background: #f4f8fb !important;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.discount-list-container {
+  width: 100%;
+  max-width: 1150px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  padding: 32px 32px 32px 32px;
+  overflow-x: auto;
+}
+
+.container {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 48px 48px 32px 48px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  min-height: 110vh;
+}
+
+.form-group {
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #222;
+  font-size: 17px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group textarea,
+.form-group select {
+  width: 100% !important;
+  padding: 14px 16px !important;
+  border: 1.5px solid #b6e6fb !important;
+  border-radius: 10px !important;
+  font-size: 18px !important;
+  background: #f7fcff !important;
+  margin-bottom: 2px;
+  transition: border 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  outline: none;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border: 1.5px solid #1BC6E8 !important;
+  box-shadow: 0 0 0 2px #e6f7fb !important;
+}
+
+.tour-actions {
+  margin: 8px 0 12px 0;
+}
+.tour-actions button {
+  background: #1BC6E8;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 14px;
+  margin-right: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.tour-actions button:last-child {
+  background: #F36E08;
+  margin-right: 0;
+}
+.tour-actions button:hover {
+  opacity: 0.9;
+}
+
+.tour-list {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px 12px;
+  max-height: 180px;
+  overflow-y: auto;
+  background: #f9f9f9;
+}
+.tour-list label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+  font-size: 15px;
+  color: #333;
+}
+.tour-list input[type="checkbox"] {
+  margin-right: 8px;
+  accent-color: #1BC6E8;
+  width: 16px;
+  height: 16px;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.25);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modalContent {
+  background: #fff;
+  border-radius: 8px;
+  padding: 32px 24px 24px 24px;
+  min-width: 340px;
+  max-width: 90vw;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+  animation: fadeIn 0.2s;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(40px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+@media (max-width: 1200px) {
+  .discount-list-container, .container {
+    max-width: 98vw;
+    padding: 16px 2vw;
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    padding: 12px 2vw;
+  }
+  h2 {
+    font-size: 20px;
+  }
+}
+ 

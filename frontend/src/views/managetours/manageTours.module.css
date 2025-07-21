@@ -1,0 +1,194 @@
+.container {
+  height: 100%;
+  width: 100%;
+  min-height: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 24px 32px 32px 32px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  max-width: 100%;
+  overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.logo {
+  width: 38px;
+  height: 38px;
+}
+.header h1 {
+  font-size: 2.1rem;
+  font-weight: bold;
+  color: #222;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.actionsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.actionsLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.actionsRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.addBtn {
+  background: linear-gradient(90deg, #1bc6e8 60%, #0e9ec7 100%);
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 9px 22px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(27,198,232,0.08);
+  transition: background 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.addBtn:hover {
+  background: linear-gradient(90deg, #0e9ec7 60%, #1bc6e8 100%);
+  box-shadow: 0 4px 16px rgba(27,198,232,0.15);
+}
+.hideBtn {
+  background: #f3f3f3;
+  color: #222;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.hideBtn:hover {
+  background: #e0e0e0;
+}
+.filterBox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.filterLabel {
+  font-weight: 500;
+  margin-right: 4px;
+  display: flex;
+  align-items: center;
+  color: #1bc6e8;
+}
+.filterSelect {
+  border-radius: 8px;
+  border: 1px solid #b2e6f7;
+  padding: 6px 14px;
+  font-size: 1rem;
+  background: #f8fcff;
+}
+.tableWrapper {
+  overflow-x: auto;
+}
+.tourTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #f8fcff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 8px rgba(27,198,232,0.08);
+}
+.tourTable th {
+  background: #1bc6e8;
+  color: #fff;
+  font-weight: 700;
+  padding: 12px 8px;
+  text-align: center;
+  font-size: 1.05rem;
+}
+.tourTable td {
+  background: #fff;
+  color: #222;
+  padding: 12px 8px;
+  text-align: center;
+  border-bottom: 1px solid #e6f7fb;
+  font-size: 1rem;
+}
+.tourTable tr:last-child td {
+  border-bottom: none;
+}
+.editBtn {
+  background: #e6fff7;
+  color: #1bc6e8;
+  border: 1.5px solid #1bc6e8;
+  border-radius: 8px;
+  padding: 6px 16px;
+  margin-right: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 1rem;
+  transition: background 0.2s, color 0.2s;
+}
+.editBtn:hover {
+  background: #1bc6e8;
+  color: #fff;
+}
+.deleteBtn {
+  background: #fff0f0;
+  color: #ff4d4f;
+  border: 1.5px solid #ff4d4f;
+  border-radius: 8px;
+  padding: 6px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 1rem;
+  transition: background 0.2s, color 0.2s;
+}
+.deleteBtn:hover {
+  background: #ff4d4f;
+  color: #fff;
+}
+.hiddenRow {
+  background: #fffbe6 !important;
+}
+.hiddenRow td {
+  background: #fffbe6 !important;
+}
+
+@media (max-width: 900px) {
+  .container {
+    padding: 10px 2px 16px 2px;
+  }
+  .header h1 {
+    font-size: 1.2rem;
+  }
+  .addBtn, .editBtn, .deleteBtn {
+    font-size: 0.95rem;
+    padding: 6px 10px;
+  }
+  .tourTable th, .tourTable td {
+    font-size: 0.95rem;
+    padding: 8px 4px;
+  }
+} 
