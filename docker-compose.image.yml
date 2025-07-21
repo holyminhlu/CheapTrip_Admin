@@ -1,0 +1,49 @@
+version: '3.8'
+services:
+  managebooking:
+    image: huuluan2004/cheaptrip-manage-booking-service
+    container_name: managebooking
+    ports:
+      - "5002:5002"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+
+  managediscount:
+    image: huuluan2004/cheaptrip-manage-discount-service
+    container_name: managediscount
+    ports:
+      - "5004:5004"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+
+  managetours:
+    image: huuluan2004/cheaptrip-manage-tours-service
+    container_name: managetours
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+
+  manageusers:
+    image: huuluan2004/cheaptrip-manage-users-service
+    container_name: manageusers
+    ports:
+      - "5003:5003"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+
+  frontend:
+    image: huuluan2004/cheaptrip-frontend
+    container_name: frontend
+    ports:
+      - "8081:80"
+    restart: unless-stopped
+    depends_on:
+      - managebooking
+      - managediscount
+      - managetours
+      - manageusers
