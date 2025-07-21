@@ -1,0 +1,53 @@
+version: '3.8'
+services:
+  managebooking:
+    build: ./backend/manageBookingService
+    container_name: managebooking
+    ports:
+      - "5002:5002"
+    restart: unless-stopped
+    env_file:
+      - ./backend/manageBookingService/.env
+    environment:
+      - NODE_ENV=production
+  managediscount:
+    build: ./backend/manageDiscountService
+    container_name: managediscount
+    ports:
+      - "5004:5004"
+    restart: unless-stopped
+    env_file:
+      - ./backend/manageDiscountService/.env
+    environment:
+      - NODE_ENV=production
+  managetours:
+    build: ./backend/manageToursService
+    container_name: managetours
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    env_file:
+      - ./backend/manageToursService/.env
+    environment:
+      - NODE_ENV=production
+  manageusers:
+    build: ./backend/manageUsersService
+    container_name: manageusers
+    ports:
+      - "5003:5003"
+    restart: unless-stopped
+    env_file:
+      - ./backend/manageUsersService/.env
+    environment:
+      - NODE_ENV=production
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "8081:80"
+    restart: unless-stopped
+    depends_on:
+      - managebooking
+      - managediscount
+      - managetours
+      - manageusers 
