@@ -35,7 +35,7 @@ jobs:
       - name: Run Frontend Tests
         working-directory: ./frontend
         run: |
-          npm ci
+          npm install
           npm run test || echo "No tests defined"
 
       # Run backend tests (tùy thuộc vào backend dùng gì)
