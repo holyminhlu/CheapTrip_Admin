@@ -11,7 +11,7 @@ export default function AdminLogin({ onLoginSuccess }) {
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
 
-  // Hàm đăng nhập hardcode ở frontend
+  // Đăng nhập hardcode ở frontend
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
